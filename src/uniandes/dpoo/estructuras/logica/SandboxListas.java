@@ -130,14 +130,16 @@ public class SandboxListas
     public void eliminarEntero( int valor )
     {
     	int contador = 0;
-    	for (int i = 0; i < listaEnteros.size(); i++) 
+    	while (contador < listaEnteros.size())
     	{
 			if (valor == listaEnteros.get(contador))
 			{
 				listaEnteros.remove(contador);
-				i++;
 			}
-			contador++;
+			else
+			{
+				contador++;	
+			}			
 		}
     }
 
@@ -300,7 +302,7 @@ public class SandboxListas
     	int contador = 0;
     	for (String elem: listaCadenas)
     	{
-    		if (elem.equals(cadena))
+    		if (elem.equalsIgnoreCase(cadena))
     		{
     			contador++;
     		}
@@ -342,9 +344,14 @@ public class SandboxListas
     {
     	boolean centinela = true;
     	
-    	if (listaEnteros.isEmpty() && otroArreglo.length == 0)
+    	if (listaEnteros.isEmpty() ^ otroArreglo.length == 0)
     	{
-    		return true;
+    		return false;
+    	}
+    	
+    	if (listaEnteros.size()!= otroArreglo.length)
+    	{
+    		return false;
     	}
     	
     	int contador = 0;
@@ -372,7 +379,12 @@ public class SandboxListas
      */
     public void generarEnteros( int cantidad, int minimo, int maximo )
     {
-
+    	ArrayList<Integer> listaRandom = new ArrayList<Integer>();
+    	
+    	for (int i = 0; i < cantidad; i++) 
+    	{
+			listaRandom.add(minimo + (int) (Math.random() * (maximo - minimo + 1)));
+		}
+    	listaEnteros = listaRandom;  	
     }
-
 }
