@@ -1,6 +1,7 @@
 package uniandes.dpoo.estructuras.logica;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -167,7 +168,18 @@ public class SandboxListas
      */
     public void insertarEntero( int entero, int posicion )
     {
-
+    	if (posicion >= listaEnteros.size())
+    	{
+    		listaEnteros.add(listaEnteros.size(),entero);
+    	}
+    	else if (posicion < 0)
+    	{
+    		listaEnteros.add(0, entero);
+    	}
+    	else
+    	{
+    		listaEnteros.add(posicion, entero);
+    	}
     }
 
     /**
@@ -177,7 +189,10 @@ public class SandboxListas
      */
     public void eliminarEnteroPorPosicion( int posicion )
     {
-
+    	if (posicion >= 0 && posicion < listaEnteros.size())
+    	{
+    		listaEnteros.remove(posicion);
+    	}
     }
 
     /**
@@ -188,6 +203,13 @@ public class SandboxListas
      */
     public void reiniciarArregloEnteros( double[] valores )
     {
+    	ArrayList<Integer> listaReiniciada = new ArrayList<Integer>(); 
+
+    	for (double elem: valores)
+    	{
+    		listaReiniciada.add((int) elem);
+    	}
+    	listaEnteros = listaReiniciada;
     }
 
     /**
@@ -198,7 +220,13 @@ public class SandboxListas
      */
     public void reiniciarArregloCadenas( List<Object> objetos )
     {
-
+    	LinkedList<String> listaReiniciadaC = new LinkedList<String>();
+    	
+    	for (Object elem: objetos)
+    	{
+    		listaReiniciadaC.add(elem.toString());
+    	}
+    	listaCadenas = listaReiniciadaC;
     }
 
     /**
@@ -208,6 +236,14 @@ public class SandboxListas
      */
     public void volverPositivos( )
     {
+    	for (int i = 0; i < listaEnteros.size(); i++) 
+    	{
+			if(listaEnteros.get(i) < 0)
+			{
+				int positivo = listaEnteros.get(i)*-1;
+				listaEnteros.set(i, positivo);
+			}
+		}
     }
 
     /**
@@ -215,7 +251,14 @@ public class SandboxListas
      */
     public void organizarEnteros( )
     {
-
+    	listaEnteros.sort(null);
+    	ArrayList<Integer> listaOrdenada = new ArrayList<Integer>();
+    	
+    	for (int i = listaEnteros.size()-1; i >= 0; i--) 
+    	{
+    		listaOrdenada.add(listaEnteros.get(i));
+		}
+    	listaEnteros = listaOrdenada;
     }
 
     /**
@@ -223,7 +266,7 @@ public class SandboxListas
      */
     public void organizarCadenas( )
     {
-
+    	listaCadenas.sort(null);
     }
 
     /**
@@ -233,7 +276,16 @@ public class SandboxListas
      */
     public int contarApariciones( int valor )
     {
-        return -1;
+    	int contador = 0;
+    	for (int elem: listaEnteros)
+    	{
+    		if (elem == valor)
+    		{
+    			contador++;
+    		}
+    	}
+    	
+        return contador;
     }
 
     /**
@@ -245,7 +297,16 @@ public class SandboxListas
      */
     public int contarApariciones( String cadena )
     {
-        return -1;
+    	int contador = 0;
+    	for (String elem: listaCadenas)
+    	{
+    		if (elem.equals(cadena))
+    		{
+    			contador++;
+    		}
+    	}
+    	
+        return contador;
     }
 
     /**
@@ -254,7 +315,22 @@ public class SandboxListas
      */
     public int contarEnterosRepetidos( )
     {
-        return -1;
+    	HashMap<Integer, Integer> histograma = new HashMap<>();
+    	
+    	for (int elem: listaEnteros)
+    	{
+    		histograma.put(elem, (histograma.getOrDefault(elem, 0)+1));
+    	}
+    	int contador = 0;
+    	
+    	for (int elem: histograma.values())
+    	{
+    		if (elem > 1) 
+    		{
+    			contador++;
+    		}
+    	}
+        return contador;
     }
 
     /**
@@ -264,7 +340,24 @@ public class SandboxListas
      */
     public boolean compararArregloEnteros( int[] otroArreglo )
     {
-        return false;
+    	boolean centinela = true;
+    	
+    	if (listaEnteros.isEmpty() && otroArreglo.length == 0)
+    	{
+    		return true;
+    	}
+    	
+    	int contador = 0;
+    	while (centinela && listaEnteros.size() > contador && otroArreglo.length > contador)
+    	{
+    		if(listaEnteros.get(contador) != otroArreglo[contador])
+    		{
+    			centinela = false;
+    		}
+    			
+    		contador++;
+    	}
+        return centinela;
     }
 
     /**
