@@ -1,6 +1,7 @@
 package uniandes.dpoo.estructuras.logica;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,7 +43,14 @@ public class SandboxListas
      */
     public List<Integer> getCopiaEnteros( )
     {
-        return null;
+    	ArrayList<Integer> listaCopia = new ArrayList<Integer>();
+    	
+    	for (int i = 0; i < listaEnteros.size(); i++) 
+    	{
+			listaCopia.add(listaEnteros.get(i));
+		}
+    	
+        return listaCopia;
     }
 
     /**
@@ -51,7 +59,14 @@ public class SandboxListas
      */
     public List<String> getCopiaCadenas( )
     {
-        return null;
+    	ArrayList<String> listaCopiaC = new ArrayList<String>();
+    	
+    	for (int i = 0; i < listaCadenas.size(); i++) 
+    	{
+			listaCopiaC.add(listaCadenas.get(i));
+		}
+    	
+        return listaCopiaC;
     }
 
     /**
@@ -60,7 +75,13 @@ public class SandboxListas
      */
     public int[] getEnterosComoArreglo( )
     {
-        return null;
+    	int[] arregloEnteros = new int[listaEnteros.size()];
+    	
+    	for (int i = 0; i < listaEnteros.size(); i++) 
+    	{
+			arregloEnteros[i] = listaEnteros.get(i);
+		}
+        return arregloEnteros;
     }
 
     /**
@@ -69,7 +90,7 @@ public class SandboxListas
      */
     public int getCantidadEnteros( )
     {
-        return -1;
+        return listaEnteros.size();
     }
 
     /**
@@ -78,7 +99,7 @@ public class SandboxListas
      */
     public int getCantidadCadenas( )
     {
-        return -1;
+        return listaCadenas.size();
     }
 
     /**
@@ -88,7 +109,7 @@ public class SandboxListas
      */
     public void agregarEntero( int entero )
     {
-
+    	listaEnteros.add(entero);
     }
 
     /**
@@ -98,15 +119,25 @@ public class SandboxListas
      */
     public void agregarCadena( String cadena )
     {
-
+    	listaCadenas.add(cadena);
     }
 
     /**
-     * Elimina todas las apariciones de un determinado valor dentro de la lista de enteros
+     * Elimina todas las apariciones de un determinado valor dentro de la lista de enterosS
      * @param valor El valor que se va eliminar
      */
     public void eliminarEntero( int valor )
     {
+    	int contador = 0;
+    	for (int i = 0; i < listaEnteros.size(); i++) 
+    	{
+			if (valor == listaEnteros.get(contador))
+			{
+				listaEnteros.remove(contador);
+				i++;
+			}
+			contador++;
+		}
     }
 
     /**
@@ -115,7 +146,16 @@ public class SandboxListas
      */
     public void eliminarCadena( String cadena )
     {
-
+    	int contador = 0;
+    	for (int i = 0; i < listaCadenas.size(); i++) 
+    	{
+			if (cadena == listaCadenas.get(contador))
+			{
+				listaCadenas.remove(contador);
+				i++;
+			}
+			contador++;
+		}
     }
 
     /**
