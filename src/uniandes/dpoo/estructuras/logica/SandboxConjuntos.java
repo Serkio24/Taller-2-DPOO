@@ -2,6 +2,7 @@ package uniandes.dpoo.estructuras.logica;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -40,13 +41,8 @@ public class SandboxConjuntos
      */
     public List<String> getCadenasComoLista( )
     {
-    	List<String> lista = new ArrayList<String>();
-    	for (String elem: arbolCadenas)
-    	{
-    		lista.add(elem);
-    	}
-    	lista.sort(null);
-        return lista;
+    	List<String> lista = new ArrayList<String>(arbolCadenas);
+    	return lista;
     }
 
     /**
@@ -55,7 +51,9 @@ public class SandboxConjuntos
      */
     public List<String> getCadenasComoListaInvertida( )
     {
-        return null;
+    	List<String> lista = new ArrayList<String>(arbolCadenas);
+    	Collections.sort(lista, Collections.reverseOrder());
+    	return lista;
     }
 
     /**
@@ -66,7 +64,12 @@ public class SandboxConjuntos
      */
     public String getPrimera( )
     {
-        return null;
+        List<String> lista = getCadenasComoLista();
+        if (lista.isEmpty())
+        {
+        	return null;
+        }
+        return lista.get(0);    
     }
 
     /**
@@ -76,8 +79,13 @@ public class SandboxConjuntos
      * @return La última cadena del conjunto, o null si está vacío.
      */
     public String getUltima( )
-    {
-        return null;
+    {	
+    	List<String> lista = getCadenasComoListaInvertida();
+        if (lista.isEmpty())
+        {
+        	return null;
+        }
+        return lista.get(0);    
     }
 
     /**
