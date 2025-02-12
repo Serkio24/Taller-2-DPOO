@@ -168,6 +168,14 @@ public class SandboxMapas
      */
     public void eliminarCadenaConValor( String valor )
     {
+    	List<String> llaves = new ArrayList<>(mapaCadenas.keySet());
+    	for (String cadena: llaves)
+    	{
+    		if (mapaCadenas.get(cadena).equals(valor))
+    		{
+    			mapaCadenas.remove(cadena);
+    		}
+    	}
     	
     }
 
@@ -184,9 +192,14 @@ public class SandboxMapas
     	
     	for (Object valor: objetos)
     	{
-    		String val = mapaCadenas.get(valor);
-    		String nuevaLlave = val.toString();
-    		nuevoMapa.put(nuevaLlave, val);
+    		String val = valor.toString();
+    		String llave = "";
+    	    for (int  i = val.length()-1; i >= 0; i--) 
+    	    {
+    			llave += val.charAt(i);
+    		}
+    	    nuevoMapa.put(llave, val);
+
     	}
     	mapaCadenas = nuevoMapa;
     	
@@ -216,25 +229,17 @@ public class SandboxMapas
      */
     public boolean compararValores( String[] otroArreglo )
     {
-    	List<String> valores = new ArrayList<>(mapaCadenas.values());
-    	valores.sort(null);
-    	List<String> otro = new ArrayList<>(Arrays.asList(otroArreglo));
-    	otro.sort(null);
-    	
-    	
-    	boolean centinela = true;
-    	int contador = 0;
-    	while (centinela && contador < otro.size())
-    	{
-    		if (!valores.get(contador).equals(otro.get(contador)))
-    		{
-    			centinela = false;
-    		}
-    		
-    		contador++;
-    	}
-    	
-        return centinela;
+        List<String> valores = getValoresComoLista();
+        List<String> otroArregloList = Arrays.asList(otroArreglo);
+        
+        for (String elem: otroArregloList)
+        {
+        	if (!valores.contains(elem))
+        	{
+        	return false;
+        	}
+        }
+        return true;	
     }
 
 }
